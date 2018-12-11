@@ -43,6 +43,15 @@ class Facility extends EventEmitter {
       },
       next => {
         this._start(next)
+      },
+      next => {
+        const start = this.opts.start
+        if (!start) return next()
+        if (typeof start !== 'function') {
+          return next(new Error('opts.start must be of type function'))
+        }
+
+        start(this, next)
       }
     ], cb)
   }
