@@ -74,7 +74,7 @@ class Facility extends EventEmitter {
         this.active = 0
         if (!this.working) return next()
 
-        let itv = setInterval(() => {
+        const itv = setInterval(() => {
           if (this.working) return
           clearInterval(itv)
           next()
