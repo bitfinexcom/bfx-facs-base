@@ -20,7 +20,7 @@ class Facility extends EventEmitter {
     if (this._hasConf) {
       const cal = this.caller
 
-      const fprefix = this.ctx.env === 'test' ? 'test' : ''
+      const fprefix = this.ctx.env
       const dirname = path.join(cal.ctx.root, 'config', 'facs')
 
       let confpath = path.join(dirname, `${this.name}.config.json`)
