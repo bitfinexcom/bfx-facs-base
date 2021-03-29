@@ -2,6 +2,7 @@
 
 const EventEmitter = require('events')
 const fs = require('fs')
+const path = require('path')
 const _ = require('lodash')
 const async = require('async')
 
@@ -19,11 +20,16 @@ class Facility extends EventEmitter {
     if (this._hasConf) {
       const cal = this.caller
 
-      const conf = JSON.parse(
-        fs.readFileSync(
-          `${cal.ctx.root}/config/facs/${this.name}.config.json`, 'utf8'
-        )
-      )
+      const fprefix = this.ctx.env
+      const dirname = path.join(cal.ctx.root, 'config', 'facs')
+
+      let confPath = path.join(dirname, `${this.name}.config.json`)
+      const envConfPath = path.join(dirname, `${fprefix}.${this.name}.config.json`)
+      if (fprefix && fs.existsSync(envConfPath)) {
+        confPath = envConfPath
+      }
+
+      const conf = JSON.parse(fs.readFileSync(confPath, 'utf8'))
       this.conf = conf[this.opts.ns]
     }
   }
@@ -68,7 +74,7 @@ class Facility extends EventEmitter {
         this.active = 0
         if (!this.working) return next()
 
-        let itv = setInterval(() => {
+        const itv = setInterval(() => {
           if (this.working) return
           clearInterval(itv)
           next()
