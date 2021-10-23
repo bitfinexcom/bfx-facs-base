@@ -11,8 +11,8 @@
     "bitfinex"
   ],
   "dependencies": {
-    "async": "^2.6.1",
-    "lodash": "^4.17.10"
+    "async": "^3.2.1",
+    "lodash": "^4.17.21"
   },
   "engine": {
     "node": ">=6.0"
