@@ -4,8 +4,8 @@
   "private": false,
   "description": "Bitfinex base facility",
   "scripts": {
-    "lint": "standard",
-    "lint:fix": "standard --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "npm run lint && npm run test:unit",
     "test:unit": "brittle tests/{,**/}*.test.js"
   },
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "brittle": "^3.19.1",
-    "standard": "^17.1.2",
+    "eslint": "^10.10.0",
     "test-tmp": "^1.4.0"
   },
   "engines": {
