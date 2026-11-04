@@ -3,7 +3,6 @@
 const EventEmitter = require('events')
 const fs = require('fs')
 const path = require('path')
-const _ = require('lodash')
 const async = require('async')
 
 class Facility extends EventEmitter {
@@ -12,7 +11,7 @@ class Facility extends EventEmitter {
 
     this.name = 'facility'
     this.caller = caller
-    this.opts = _.extend({ ns: this.name }, opts)
+    this.opts = Object.assign({ ns: this.name }, opts)
     this.ctx = ctx
   }
 
